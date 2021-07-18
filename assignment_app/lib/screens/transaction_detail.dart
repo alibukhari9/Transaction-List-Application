@@ -1,16 +1,13 @@
 import 'package:assignment_app/services/models.dart';
+import 'package:assignment_app/shared_functions.dart';
+import 'package:assignment_app/widgets/transaction_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionDetails extends StatelessWidget {
-  Transaction transaction;
+  final Transaction transaction;
 
   TransactionDetails(this.transaction);
-  String formattedDate() {
-    var format = DateFormat('dd-MMM-yyyy');
-    var dateString = format.format(transaction.date);
-    return dateString;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,47 +28,43 @@ class TransactionDetails extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Text('Date:  ' + formattedDate(),
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              TransactionProperty('Date', formattedDate(transaction.date!)),
               SizedBox(
                 height: 20,
               ),
-              Text('Amount:  ' + transaction.amount,
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              TransactionProperty('Amount', transaction.amount!),
               SizedBox(
                 height: 20,
               ),
-              Text('BIC:  ' + transaction.bic,
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              TransactionProperty(
+                'BIC',
+                transaction.bic!,
+              ),
               SizedBox(
                 height: 20,
               ),
-              Text('Currency Code:  ' + transaction.currencyCode,
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              TransactionProperty(
+                'Currency Code',
+                transaction.currencyCode!,
+              ),
               SizedBox(
                 height: 20,
               ),
-              Text('Description:  ' + transaction.description,
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              TransactionProperty(
+                'Description',
+                transaction.description!,
+              ),
               SizedBox(
                 height: 20,
               ),
-              Text('IBAN:  ' + transaction.iban,
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              TransactionProperty('IBAN', transaction.iban!),
               SizedBox(
                 height: 20,
               ),
-              Text(
-                  'Transaction Type:  ' +
-                      toBeginningOfSentenceCase(transaction.type),
-                  style:
-                      TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              TransactionProperty(
+                'Transaction Type',
+                toBeginningOfSentenceCase(transaction.type as String)!,
+              ),
             ],
           ),
         ),

@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
-
 class Transaction {
-  DateTime date;
-  String amount;
-  String type, currencyCode, iban, description, bic, id;
+  DateTime? date;
+  String? amount;
+  String? type, currencyCode, iban, description, bic, id;
 
   Transaction(
       {this.date,

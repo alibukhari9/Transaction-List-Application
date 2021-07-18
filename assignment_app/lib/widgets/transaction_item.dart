@@ -1,17 +1,12 @@
 import 'package:assignment_app/screens/transaction_detail.dart';
 import 'package:assignment_app/services/models.dart';
+import 'package:assignment_app/shared_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionItem extends StatelessWidget {
-  Transaction transaction;
+  final Transaction transaction;
   TransactionItem(this.transaction);
-
-  String formattedDate() {
-    var format = DateFormat('dd-MMM-yyyy');
-    var dateString = format.format(transaction.date);
-    return dateString;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +36,7 @@ class TransactionItem extends StatelessWidget {
                       color: Colors.black),
                 ),
                 Text(
-                  formattedDate(),
+                  formattedDate(transaction.date!),
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
@@ -56,7 +51,7 @@ class TransactionItem extends StatelessWidget {
                       color: Colors.black),
                 ),
                 Text(
-                  transaction.amount,
+                  transaction.amount!,
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
@@ -74,7 +69,7 @@ class TransactionItem extends StatelessWidget {
                       color: Colors.black),
                 ),
                 Text(
-                  transaction.currencyCode,
+                  transaction.currencyCode!,
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
@@ -89,7 +84,7 @@ class TransactionItem extends StatelessWidget {
                       color: Colors.black),
                 ),
                 Text(
-                  toBeginningOfSentenceCase(transaction.type),
+                  toBeginningOfSentenceCase(transaction.type)!,
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,

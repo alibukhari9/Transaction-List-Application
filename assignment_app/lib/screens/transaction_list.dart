@@ -10,37 +10,30 @@ class TransactionsList extends StatefulWidget {
 }
 
 class _TransactionsListState extends State<TransactionsList> {
-  TransactionProviders transactionProviders;
+  TransactionProviders? transactionProviders;
   List<Transaction> searchList = [];
+  // int? num;
   bool isLoaded = false;
   bool isSearchList = false;
   TextEditingController searchController = new TextEditingController();
-  @override
-  void initState() {
-    // TODO: implement initState
-    // transactionProviders = Provider.of<TransactionProviders>(context);
-    // transactionProviders.loadTransactions();
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     transactionProviders =
         Provider.of<TransactionProviders>(context, listen: false);
-    transactionProviders.loadTransactions().then((v) {
+    transactionProviders!.loadTransactions().then((v) {
       setState(() {
         isLoaded = true;
-        sortTransactions();
+        // sortTransactions();
       });
     });
     super.didChangeDependencies();
   }
 
-  void sortTransactions() {
-    transactionProviders.transactionList
-        .sort((a, b) => a.date.compareTo(b.date));
-  }
+  // void sortTransactions() {
+  //   transactionProviders.transactionList
+  //       .sort((a, b) => a.date.compareTo(b.date));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +51,9 @@ class _TransactionsListState extends State<TransactionsList> {
                   borderRadius: BorderRadius.circular(15), color: Colors.white),
               child: TextField(
                 onSubmitted: (v) {
-                  searchList = transactionProviders.transactionList
+                  searchList = transactionProviders!.transactionList!
                       .where((element) =>
-                          element.type.toLowerCase().contains(v.toLowerCase()))
+                          element.type!.toLowerCase().contains(v.toLowerCase()))
                       .toList();
 
                   if (v.isEmpty) {
@@ -94,11 +87,11 @@ class _TransactionsListState extends State<TransactionsList> {
                       itemBuilder: (ctx, index) {
                         return TransactionItem(isSearchList
                             ? searchList[index]
-                            : transactionProviders.transactionList[index]);
+                            : transactionProviders!.transactionList![index]);
                       },
                       itemCount: isSearchList
                           ? searchList.length
-                          : transactionProviders.transactionList.length,
+                          : transactionProviders!.transactionList!.length,
                     ),
                   )
                 : Center(

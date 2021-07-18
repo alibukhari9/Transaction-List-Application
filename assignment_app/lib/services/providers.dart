@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class TransactionProviders extends ChangeNotifier {
-  List<Transaction> transactionList = [];
+  List<Transaction>? transactionList = [];
 
   Future<void> loadTransactions() async {
     final response = await http.get(Uri.parse(
@@ -20,7 +20,7 @@ class TransactionProviders extends ChangeNotifier {
           .map((e) => Transaction.fromMap(e))
           .toList();
       notifyListeners();
-      return transactionList;
+      return;
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
